@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('android.microntek.serial-dex2jar.jar'))

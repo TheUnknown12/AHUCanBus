@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion '25.0.1'
+    defaultConfig {
+        applicationId 'android.microntek.canbus'
+        minSdkVersion 22
+        targetSdkVersion 22
+        versionCode 3
+        versionName '3.0'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+    }
+}
+gradle.taskGraph.whenReady {
+    tasks.each { task ->
+        if (task.name.equals('mockableAndroidJar')) {
+            task.enabled = false
+        }
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    provided project(':android.microntek.serial')
+}
